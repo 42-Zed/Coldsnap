@@ -1,6 +1,8 @@
 var ImgName, ImgURL;
 var files = [];
 var reader = new FileReader();
+var count = 0;
+var reset = 0;
 
 //Select an Image Locally
 function selectImage() {
@@ -42,7 +44,7 @@ function uploadImage() {
                 //Dropped the decimal places to make the upload progress cleaner
                 progress = progress.toFixed(0);
 
-                document.getElementById("upProgress").innerHTML = 'Upload Progress: ' + progress + "%";
+                document.getElementById("upProgress").innerHTML = 'Upload Progress: ' + progress + "%";         
             },
 
             //Error Handling
@@ -63,6 +65,7 @@ function uploadImage() {
                     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
                         imgLinks: firebase.firestore.FieldValue.arrayUnion(ImgURL)
                     });
+                    document.getElementById("upProgress").innerHTML = ""; // Added to 'destroy' the upload progress text upon success.
                 });
 
                 //---DEBUGGING---
@@ -71,7 +74,7 @@ function uploadImage() {
                 //     Link: ImgURL
                 // });
 
-                alert('image added successfully');
+                alert('Image added successfully');
             }
         );
     });
@@ -96,11 +99,14 @@ function retrieveImage() {
 
                 var imageArray = docData.imgLinks;
 
-                for (var i = 0; i < imageArray.length; i++) {
+                for (var i = 0; i < imageArray.length && i < 4; i++) {
                     var imageThumb = document.createElement('img');
+                    imageThumb.id = i;
                     //------------------ADD IMG PROPERTIES HERE--------------------------
                     imageThumb.src = docData.imgLinks[i];
                     imageThumb.className = "thumbnail-item";
+
+                    count++; // Shows how many elements were created. To be used in Next/Prev for loops.
 
                     //Add the img to the DIV element of ID: "list"
                     document.getElementById('list').appendChild(imageThumb);
@@ -116,6 +122,85 @@ function retrieveImage() {
     });
     // ^^^ This limits the Click Event Listener to run only once so that we don't have to deal with duplication
     //Users will have to refresh to press "Show Images" again if they have uploaded new images after activation
+
+    // Iteration functionality to destroy previous elements and
+    // increments the next elements by four total (if possible).
+    document.getElementById("next").addEventListener("click", function () {
+        //Get a reference to the current Authenticated user and retrieve the ImgLinks array from that ref
+        firebase
+            .firestore()
+            .collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .get()
+            .then((docRef) => {
+                docData = docRef.data();
+
+                var imageArray = docData.imgLinks;
+
+                // Failsafe to insure that when next is pressed it doesn't delete 
+                // all the elements at the end of the array length.
+            removeElements();
+
+            if (imageArray.length > 4)
+            {
+                for (var i = count; i < imageArray.length && i < count + 4; i++) {
+                    var imageThumb = document.createElement('img');
+                    imageThumb.id = i;
+                    //------------------ADD IMG PROPERTIES HERE--------------------------
+                    imageThumb.src = docData.imgLinks[i];
+                    imageThumb.className = "thumbnail-item";
+
+                    reset++; // Stores number of elements created - 4. Used in remove elements.
+
+                    //Add the img to the DIV element of ID: "list"
+                    document.getElementById('list').appendChild(imageThumb);
+                    console.log("Image added!");
+                }
+                count = count + 4;
+            }
+            });
+         }, 
+    );
+
+    // Broken af prev button functionality
+    /*
+    document.getElementById("prev").addEventListener("click", function () {
+        //Get a reference to the current Authenticated user and retrieve the ImgLinks array from that ref
+        firebase
+            .firestore()
+            .collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .get()
+            .then((docRef) => {
+                docData = docRef.data();
+
+                var imageArray = docData.imgLinks;
+                removeElements();
+            
+                for (var i = count; i > reset; i--) {
+                    var imageThumb = document.createElement('img');
+                    imageThumb.id = i;
+                    //------------------ADD IMG PROPERTIES HERE--------------------------
+                    imageThumb.src = docData.imgLinks[i];
+                    imageThumb.className = "thumbnail-item";
+
+                    count--;
+                    reset++; // Stores number of elements created - 4. Used in remove elements.
+
+                    //Add the img to the DIV element of ID: "list"
+                    document.getElementById('list').appendChild(imageThumb);
+                    console.log("Image added!");
+                }
+            });
+         }) */
+}
+
+function removeElements() {
+    for (var i = reset; i < (reset + 4); i++)
+    {
+        var el = document.getElementById(i);
+        el.remove();
+    }
 }
 
 //---------------------------------EXPERIMENTAL CODE FOR GALLERY - DOES NOT WORK!!!---------------------------------------
@@ -151,6 +236,7 @@ properties, as well as the SRC to the corresponding image URL from Firebase.
 function initializeEvents() {
     'use strict';
 
+    count = 0;
     selectImage();
     uploadImage();
     retrieveImage();

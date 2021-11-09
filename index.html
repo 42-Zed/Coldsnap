@@ -21,51 +21,55 @@
 
 <div class="square-container">
     <centric>
-
         <body class="gradient">
           <style>
                 img {
                     height: 400px;
                     width: 400px;
-                    border: 1px solid black;
-                    background: src="stylesheets/images/insert_image.png";
+                    border: 2px  black;
+                    background-image: url("stylesheets/images/insert_image.png");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-color: #CCFFFF;
+                    border-style: double;
+
                 }
           </style>
 
             <div class="form-group">
                 <label for="namebox" style="color:black; font-family: quicksand; font-weight: bold;">Image 
                     Title</label>
-                <input class="form-control" id="namebox" type="text"> <br><br>
+                <input class="form-control" style="color: black; background: #CCFFFF; border: solid 2px black;" id="namebox" type="text"> <br>
             </div>
 
             <img id="image"> <br><br>
 
-            <!-- This div is where the images are dynamically added from image.js -->
-            <!-- STYLE ME PLS :) -->
-            <div id="list" class="imageList">
-
-            </div>
-
             <div class="button">
                 <button-alignment>
-                    <button id="select" class="btn btn-warning" style="color: black; font-family: quicksand; font-weight: bold;">Select Image</button>
-                    <button id="upload" class="btn btn-warning" style="color: black; font-family: quicksand; font-weight: bold;">Upload Image</button>
-                    <button id="show" class="btn btn-warning" style="color: black; font-family: quicksand; font-weight: bold;">Show Images</button>
+                    <button id="select" class="btn btn-dark" style="color: white; font-family: quicksand; font-weight: bold;">Select Image</button>
+                    <button id="upload" class="btn btn-dark" style="color: white; font-family: quicksand; font-weight: bold;">Upload Image</button>
+                    <button id="show" class="btn btn-dark" style="color: white; font-family: quicksand; font-weight: bold;">Show Images</button>
                 </button-alignment>
                 <br><br>
             </div>
 
+            <!-- <button id="prev" class="btn btn-warning" style="color: black; font-family: quicksand; font-weight: bold;">Prev</button> -->
             <button onClick="logout(); toLogin()" id="logout" class="btn btn-danger"
-                style="margin-left: 154px; font-family: quicksand;">Logout</button> <br><br>
+                style="margin-left: 154px; font-family: quicksand;">Logout</button>
+            <button id="next" class="btn btn-outline-dark" style="color: black; font-family: quicksand; font-weight: bold;">Next</button>
+                <br><br>
 
-            <label id="upProgress"></label> <br><br>
+                <label id="upProgress" style="margin-left: 125px;"></label>
+
+             <!-- This div is where the images are dynamically added from image.js -->
+            <!-- STYLE ME PLS :) -->
+            <div id="list" class="imageList">
+            </div>
 
             <script src="scripts/navigation.js" charset="utf-8"></script>
             <script src="scripts/firebaseconfig.js" charset="utf-8"></script>
             <script src="scripts/image.js" charset="utf-8"></script>
         </body>
-    </centric>
+    </centric>   
 </div>
-
-
 </html>

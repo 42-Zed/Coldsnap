@@ -25,10 +25,14 @@ body {
   align-items: center;
 }
 
+.fixed-pos {
+  position: fixed;
+}
+
 body.gradient {
   
   /* Gradient background for transitioning colors */
-  background: linear-gradient(-45deg, #000000, #0099E6, #CCFFFF, #FFFFFF);
+  background: linear-gradient(-45deg, #000000, #0099E6, #666699, #FFFFFF);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   height: 100vh; 
@@ -70,7 +74,7 @@ body.gradient {
 }
 
 .button {
-  text-align:center;
+  text-align: center;
 }
 
 @keyframes gradient {
@@ -86,14 +90,17 @@ body.gradient {
 } 
 
 .imageList {
-  flex: 0 1 auto;
   display: flex;
-  flex-direction: row
+  flex: 0 1 auto;
+  flex-direction: row;
 }
 
 .thumbnail-item {
   display:inline-block;
-  min-width: 120px;
-  max-width: 120px;
+  min-width: 100px;
+  max-width: 100px;
+
+  height: 100px;
+  width: 100px;
 }
 
