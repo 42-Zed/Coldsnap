@@ -87,6 +87,7 @@ function uploadImage() {
 function retrieveImage() {
     'use strict';
     var docData;
+    var iterations = 0;
 
     document.getElementById("show").addEventListener("click", function () {
         //Get a reference to the current Authenticated user and retrieve the ImgLinks array from that ref
@@ -143,12 +144,10 @@ function retrieveImage() {
             .doc(firebase.auth().currentUser.uid)
             .get()
             .then((docRef) => {
-                docData = docRef.data();
+            docData = docRef.data();
 
-                var imageArray = docData.imgLinks;
-
-                // Failsafe to insure that when next is pressed it doesn't delete 
-                // all the elements at the end of the array length.
+            var imageArray = docData.imgLinks;
+            
             removeElements();
 
             if (imageArray.length > 4)
@@ -160,14 +159,16 @@ function retrieveImage() {
                     imageThumb.src = docData.imgLinks[i];
                     imageThumb.className = "thumbnail-item";
 
+                    iterations++;
                     reset++; // Stores number of elements created - 4. Used in remove elements.
 
                     //Add the img to the DIV element of ID: "list"
                     document.getElementById('list').appendChild(imageThumb);
                     console.log("Image added!");
                 }
-                count = count + 4;
-            }
+                count = count + iterations;
+                iterations = 0;
+            } else { alert('Not enough images to increment.'); }
             });
     });
 
@@ -207,7 +208,9 @@ function retrieveImage() {
                     //Add the img to the DIV element of ID: "list"
                     document.getElementById('list').appendChild(imageThumb);
                     console.log("Image added!");
-                }
+                } 
+                count = count - iterations;
+                iterations = 0;
             });
          }) 
 }
