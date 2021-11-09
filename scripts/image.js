@@ -125,12 +125,8 @@ function retrieveImage() {
                 // console.log(docData);
                 // console.log(docData.imgLinks[0]);
             });
-        },  /*{
-            once: true
-        }*/
+        },  
     );
-    // ^^^ This limits the Click Event Listener to run only once so that we don't have to deal with duplication
-    //Users will have to refresh to press "Show Images" again if they have uploaded new images after activation
 
     // Iteration functionality to destroy previous elements and
     // increments the next elements by four total (if possible).
@@ -159,15 +155,13 @@ function retrieveImage() {
                     imageThumb.src = docData.imgLinks[i];
                     imageThumb.className = "thumbnail-item";
 
-                    iterations++;
                     reset++; // Stores number of elements created - 4. Used in remove elements.
 
                     //Add the img to the DIV element of ID: "list"
                     document.getElementById('list').appendChild(imageThumb);
                     console.log("Image added!");
                 }
-                count = count + iterations;
-                iterations = 0;
+                count = count + 4;
             } else { alert('Not enough images to increment.'); }
             });
     });
@@ -198,7 +192,7 @@ function retrieveImage() {
                     //Check that we're fetching a photo actually within the array
                     //If not, then continue to next iteration
                     if((i-1) > imageArray.length-1) {
-                        continue;
+                         continue;
                     }
                     console.log(imageArray);
                     
@@ -209,19 +203,9 @@ function retrieveImage() {
                     document.getElementById('list').appendChild(imageThumb);
                     console.log("Image added!");
                 } 
-                count = count - iterations;
-                iterations = 0;
             });
          }) 
 }
-
-// function removeElements() {
-//     for (var i = reset; i < (reset + 4); i++)
-//     {
-//         var el = document.getElementById(i);
-//         el.remove();
-//     }
-// }
 
 function removeElements() {
     //Assume there are always 4 elements
@@ -237,9 +221,6 @@ function removeElements() {
             el.remove();
         }
     }
-
-    // var leftover = document.getElementById(reset);
-    // leftover.remove();
 }
 
 function destroyList() {
