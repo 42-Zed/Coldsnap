@@ -74,8 +74,8 @@
 </div>
 
 <!--Audio logic by https://stackoverflow.com/questions/15612120/how-do-i-make-an-audio-file-play-continuously-on-all-pages-->
-<!--MP3 by Game Freak -->
-<audio preload="auto" src="stylesheets/mp3/snowpoint.mp3" loop="true" autobuffer></audio>
+<!--MP3 by Game Freak ~ Snowpoint -->
+<audio preload="auto" src="stylesheets/mp3/snowpoint.mp3" loop="false" autobuffer></audio>
     
     <script>
     
@@ -103,6 +103,7 @@
     }
     
     var song = document.getElementsByTagName('audio')[0];
+    song.volume = 0.2;
     var played = false;
     var tillPlayed = getCookie('timePlayed');
     function update()
@@ -123,7 +124,7 @@
         setCookie('timePlayed', song.currentTime);
         }
     }
-    setInterval(update,10);
+    setInterval(update,1);
     </script>
 
 </html>

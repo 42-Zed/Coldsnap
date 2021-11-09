@@ -7,7 +7,7 @@ html, body {
 .wrapper {
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(farthest-corner at 30vw 20vh, #001580 1%, #CCFFFF 100%);
+    background: radial-gradient(farthest-corner at 30vw 20vh, #CCFFFF 1%, #001580 100%);
     /* #7397a1 #3f2c41 */
 }
 .snow {
