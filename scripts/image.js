@@ -7,6 +7,7 @@ function selectImage() {
     'use strict';
 
     document.getElementById("select").addEventListener("click", function (e) {
+        //---DEBUGGING---
         //console.log("The button was clicked!");
 
         var input = document.createElement('input');
@@ -58,12 +59,13 @@ function uploadImage() {
                 */
                 uploadTask.snapshot.ref.getDownloadURL().then(function (url) {
                     ImgURL = url;
-                    
+
                     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
                         imgLinks: firebase.firestore.FieldValue.arrayUnion(ImgURL)
                     });
                 });
 
+                //---DEBUGGING---
                 // firebase.database().ref('Pictures/' + ImgName).set({
                 //     Name: ImgName,
                 //     Link: ImgURL
@@ -75,29 +77,76 @@ function uploadImage() {
     });
 }
 
-//Retrieve an Image
+//Display current uploaded images
 function retrieveImage() {
+    'use strict';
     var docData;
 
-    document.getElementById("retrieve").addEventListener("click", function () {
-        //ImgName = document.getElementById("namebox").value;
-        //console.log(firebase.auth().currentUser.uid + '/Images/' + ImgName);
-
-        //Get a reference to the current User document and retrieve the ImgLinks array from that ref
+    document.getElementById("show").addEventListener("click", function () {
+        //Get a reference to the current Authenticated user and retrieve the ImgLinks array from that ref
         firebase
-        .firestore()
-        .collection("users")
-        .doc(firebase.auth().currentUser.uid)
-        .get()
-        .then((docRef) => {
-            docData = docRef.data();
-            document.getElementById("image").src = docData.imgLinks[0];
+            .firestore()
+            .collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .get()
+            .then((docRef) => {
+                docData = docRef.data();
+                //---DEBUGGING---
+                //document.getElementById("image").src = docData.imgLinks[0];
 
-            // console.log(docData);
-            // console.log(docData.imgLinks[0]);
-        });
+                var imageArray = docData.imgLinks;
+
+                for (var i = 0; i < imageArray.length; i++) {
+                    var imageThumb = document.createElement('img');
+                    //------------------ADD IMG PROPERTIES HERE--------------------------
+                    imageThumb.src = docData.imgLinks[i];
+                    imageThumb.className = "thumbnail-item";
+
+                    //Add the img to the DIV element of ID: "list"
+                    document.getElementById('list').appendChild(imageThumb);
+                    console.log("Image added!");
+                }
+
+                //---DEBUGGING---
+                // console.log(docData);
+                // console.log(docData.imgLinks[0]);
+            });
+    }, {
+        once: true
     });
+    // ^^^ This limits the Click Event Listener to run only once so that we don't have to deal with duplication
+    //Users will have to refresh to press "Show Images" again if they have uploaded new images after activation
 }
+
+//---------------------------------EXPERIMENTAL CODE FOR GALLERY - DOES NOT WORK!!!---------------------------------------
+/*
+This function is very similar to RetrieveImage() but it populates the page with all the images that
+the user has uploaded to Firebase DB. This is done by dynamically creating an IMG element, setting various
+properties, as well as the SRC to the corresponding image URL from Firebase.
+*/
+// function gallery() {
+//     'use strict';
+//     console.log(document.firebase.auth().currentUser.uid);
+//     var docData;
+
+//     //Get a reference to the current User document and retrieve the ImgLinks array from that ref
+//     firebase.firestore().collection("users").doc(document.firebase.auth().currentUser.uid).get().then((docRef) => {
+//         docData = docRef.data();
+
+//         //Get an array of all the image URLs for this user
+//         var imageArray = docData.imgLinks;
+
+//         //Iterate through and create images for all of them on the page
+//         for (var i = 0; i < imageArray.length; i++) {
+//             var imageThumb = document.createElement('img');
+//             imageThumb.src = imageArray[i];
+//             imageThumb.className = "thumbnail-item";
+
+//             document.getElementById('list').appendChild(imageThumb);
+//             console.log("Image added to gallery");
+//         }
+//     });
+// }
 
 function initializeEvents() {
     'use strict';
@@ -105,6 +154,7 @@ function initializeEvents() {
     selectImage();
     uploadImage();
     retrieveImage();
+    //gallery();
     console.log("I'm Running!");
 }
 

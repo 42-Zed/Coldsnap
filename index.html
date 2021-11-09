@@ -28,8 +28,9 @@
                     height: 400px;
                     width: 400px;
                     border: 1px solid black;
+                    background: src="stylesheets/images/insert_image.png";
                 }
-        </style>
+          </style>
 
             <div class="form-group">
                 <label for="namebox" style="color:black; font-family: quicksand; font-weight: bold;">Image 
@@ -39,11 +40,17 @@
 
             <img id="image"> <br><br>
 
+            <!-- This div is where the images are dynamically added from image.js -->
+            <!-- STYLE ME PLS :) -->
+            <div id="list" class="imageList">
+
+            </div>
+
             <div class="button">
                 <button-alignment>
                     <button id="select" class="btn btn-warning" style="color: black; font-family: quicksand; font-weight: bold;">Select Image</button>
                     <button id="upload" class="btn btn-warning" style="color: black; font-family: quicksand; font-weight: bold;">Upload Image</button>
-                    <button id="retrieve" class="btn btn-warning" style="color: black; font-family: quicksand; font-weight: bold;">Retrieve Image</button>
+                    <button id="show" class="btn btn-warning" style="color: black; font-family: quicksand; font-weight: bold;">Show Images</button>
                 </button-alignment>
                 <br><br>
             </div>

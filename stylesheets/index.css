@@ -85,3 +85,15 @@ body.gradient {
   }
 } 
 
+.imageList {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: row
+}
+
+.thumbnail-item {
+  display:inline-block;
+  min-width: 120px;
+  max-width: 120px;
+}
+
