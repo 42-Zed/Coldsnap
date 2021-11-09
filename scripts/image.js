@@ -132,7 +132,7 @@ function retrieveImage() {
     // increments the next elements by four total (if possible).
     document.getElementById("next").addEventListener("click", function () {
         //Get a reference to the current Authenticated user and retrieve the ImgLinks array from that ref
-        removeElements();
+        //removeElements();
 
         firebase
             .firestore()
