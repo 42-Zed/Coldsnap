@@ -135,6 +135,8 @@ function retrieveImage() {
     // increments the next elements by four total (if possible).
     document.getElementById("next").addEventListener("click", function () {
         //Get a reference to the current Authenticated user and retrieve the ImgLinks array from that ref
+        removeElements();
+
         firebase
             .firestore()
             .collection("users")
@@ -167,11 +169,9 @@ function retrieveImage() {
                 count = count + 4;
             }
             });
-         }, 
-    );
+    });
 
-    // Broken af prev button functionality
-    /*
+    // Broken af prev button functionality - JK IT KINDA WORKS NOW LOL
     document.getElementById("prev").addEventListener("click", function () {
         //Get a reference to the current Authenticated user and retrieve the ImgLinks array from that ref
         firebase
@@ -184,31 +184,59 @@ function retrieveImage() {
 
                 var imageArray = docData.imgLinks;
                 removeElements();
-            
-                for (var i = count; i > reset; i--) {
-                    var imageThumb = document.createElement('img');
-                    imageThumb.id = i;
-                    //------------------ADD IMG PROPERTIES HERE--------------------------
-                    imageThumb.src = docData.imgLinks[i];
-                    imageThumb.className = "thumbnail-item";
 
-                    count--;
-                    reset++; // Stores number of elements created - 4. Used in remove elements.
+                //Remove 4 from count since we're going back to the previous 4 elements
+                count = count - 4;
+            
+                for (var i = count; count > 0 && count - i != 4; i--) {
+                    var imageThumb = document.createElement('img');
+
+                    imageThumb.id = i-1;
+                    //------------------ADD IMG PROPERTIES HERE--------------------------
+
+                    //Check that we're fetching a photo actually within the array
+                    //If not, then continue to next iteration
+                    if((i-1) > imageArray.length-1) {
+                        continue;
+                    }
+                    console.log(imageArray);
+                    
+                    imageThumb.src = docData.imgLinks[i-1];
+                    imageThumb.className = "thumbnail-item";
 
                     //Add the img to the DIV element of ID: "list"
                     document.getElementById('list').appendChild(imageThumb);
                     console.log("Image added!");
                 }
             });
-         }) */
+         }) 
 }
 
+// function removeElements() {
+//     for (var i = reset; i < (reset + 4); i++)
+//     {
+//         var el = document.getElementById(i);
+//         el.remove();
+//     }
+// }
+
 function removeElements() {
-    for (var i = reset; i < (reset + 4); i++)
-    {
-        var el = document.getElementById(i);
-        el.remove();
+    //Assume there are always 4 elements
+    for(var i = count; count - i != 4; i--) {
+        var el = document.getElementById(i-1);
+        
+        //If the IMG element of that count never existed then skip otherwise an error will be thrown
+        //by remove()
+        if(el === null){
+            console.log("NO ELEMENT HERE!");
+        }
+        else {
+            el.remove();
+        }
     }
+
+    // var leftover = document.getElementById(reset);
+    // leftover.remove();
 }
 
 function destroyList() {
