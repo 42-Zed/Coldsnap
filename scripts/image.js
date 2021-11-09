@@ -98,6 +98,10 @@ function retrieveImage() {
                 //document.getElementById("image").src = docData.imgLinks[0];
 
                 var imageArray = docData.imgLinks;
+                
+                destroyList();
+                count = 0;
+                reset = 0;
 
                 for (var i = 0; i < imageArray.length && i < 4; i++) {
                     var imageThumb = document.createElement('img');
@@ -117,9 +121,10 @@ function retrieveImage() {
                 // console.log(docData);
                 // console.log(docData.imgLinks[0]);
             });
-    }, {
-        once: true
-    });
+        },  /*{
+            once: true
+        }*/
+    );
     // ^^^ This limits the Click Event Listener to run only once so that we don't have to deal with duplication
     //Users will have to refresh to press "Show Images" again if they have uploaded new images after activation
 
@@ -201,6 +206,10 @@ function removeElements() {
         var el = document.getElementById(i);
         el.remove();
     }
+}
+
+function destroyList() {
+    document.getElementById('list').innerHTML='';
 }
 
 //---------------------------------EXPERIMENTAL CODE FOR GALLERY - DOES NOT WORK!!!---------------------------------------
