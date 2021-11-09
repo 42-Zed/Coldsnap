@@ -116,11 +116,23 @@ function retrieveImage() {
                     //------------------ADD IMG PROPERTIES HERE--------------------------
                     imageThumb.src = docData.imgLinks[i];
                     imageThumb.className = "thumbnail-item";
-
+                    // imageThumb.addEventListener("click", function(){
+                    //     // var link = document.createElement('a');
+                    //     // link.href = imageThumb.src;
+                    //     // link.download = imageThumb.id + ".jpg";
+                    //     // document.body.appendChild(link);
+                    //     // link.click();
+                    //     // document.body.removeChild(link);
+                    //     window.open();
+                    // });
+                    //imageThumb.onclick = "image(this)";
                     count++; // Shows how many elements were created. To be used in Next/Prev for loops.
 
                     //Add the img to the DIV element of ID: "list"
                     document.getElementById('list').appendChild(imageThumb);
+                    document.getElementById(i).addEventListener("click", function() {
+                        window.open(this.src);
+                    })
                     console.log("Image added!");
                 }
 
@@ -154,11 +166,15 @@ function retrieveImage() {
                             //------------------ADD IMG PROPERTIES HERE--------------------------
                             imageThumb.src = docData.imgLinks[i];
                             imageThumb.className = "thumbnail-item";
+                            imageThumb.onclick = "image(this)";
     
                             reset++; // Stores number of elements created - 4. Used in remove elements.
     
                             //Add the img to the DIV element of ID: "list"
                             document.getElementById('list').appendChild(imageThumb);
+                            document.getElementById(i).addEventListener("click", function() {
+                                window.open(this.src);
+                            })
                             console.log("Image added!");
                         }
                         count = count + 4;
@@ -254,7 +270,9 @@ function retrieveImage() {
                         imageThumb.className = "thumbnail-item";
 
                         document.getElementById('list').appendChild(imageThumb);
-
+                        document.getElementById(countCounter - 1).addEventListener("click", function() {
+                            window.open(this.src);
+                        })
                         console.log("Image added!");
                         countCounter--;
                     }
@@ -315,6 +333,12 @@ function removeElements() {
 function destroyList() {
     document.getElementById('list').innerHTML = '';
 }
+
+function image(img) {
+    var src = img.src;
+    window.open(src);
+}
+
 
 //---------------------------------EXPERIMENTAL CODE FOR GALLERY - DOES NOT WORK!!!---------------------------------------
 /*
