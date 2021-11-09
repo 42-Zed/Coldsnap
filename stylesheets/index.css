@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'ceviche';
+    src: url('fonts/CevicheOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+@font-face {
+    font-family: 'perma';
+    src: url('fonts/PermanentMarker-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+@font-face {
+  font-family: 'quicksand';
+  src: url('fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal; 
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Gradient background for transitioning colors */
+  background: linear-gradient(-45deg, #000000, #FFFC99, #EB6123, #FFFFFF);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+.square-container {
+    /* Creates the square */
+    width: 700px;
+    height: 792px;
+    border: 1px solid black;
+    box-shadow: 4px 4.5px;
+    background: #fef9f8;
+    border-radius: 25px; 
+  
+    /* Centers the contents within the square. */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    /* Displays the square in the exact middle of the screen. */
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+.btn-warning { 
+    display: center; 
+}
+
+.button {
+  text-align:center;
+}
+

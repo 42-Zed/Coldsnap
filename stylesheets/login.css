@@ -1,0 +1,114 @@
+@font-face {
+  font-family: 'ceviche';
+  src: url('fonts/CevicheOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'perma';
+  src: url('fonts/PermanentMarker-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'quicksand';
+  src: url('fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal; 
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Gradient background for transitioning colors */
+  background: linear-gradient(-45deg, #000000, #FFFC99, #EB6123, #FFFFFF);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+button {
+    margin-top: 8px;
+}
+
+.centric {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.logo-text {
+  text-align: center;
+  font-family: ceviche;
+  font-size: 75px;
+}
+
+.directions-text {
+    text-align: center;
+    font-family: perma;
+}
+
+.button-alignment {
+  display: flex;
+  justify-content: center;
+}
+
+.circle-container {
+      /* Creats the circle container. */
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      border-style: solid;
+      border: 4px 2px #0000;
+      box-shadow: 4px 4.5px;
+      background: white;
+
+      /* Centers the contents within the circle. */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      /* Displays the circle in the exact middle of the screen. */
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* Currently out of use. */
+.img-div {
+  position:absolute;
+  top:0; 
+  left:0; 
+  right:0; 
+  bottom:0; 
+  width:100%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
