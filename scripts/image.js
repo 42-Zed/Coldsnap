@@ -35,6 +35,9 @@ function uploadImage() {
 
     document.getElementById("upload").addEventListener("click", function () {
         ImgName = document.getElementById("namebox").value;
+
+        if (ImgName != '')
+        {
         //Store the image into a unique folder specific to the current logged in User based on FB UID
         var uploadTask = firebase.storage().ref(firebase.auth().currentUser.uid + '/Images/' + ImgName + ".png").put(files[0]);
 
@@ -76,7 +79,7 @@ function uploadImage() {
 
                 alert('Image added successfully');
             }
-        );
+        ); } else { alert('Please insert an image name'); }
     });
 }
 
