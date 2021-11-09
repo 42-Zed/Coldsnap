@@ -87,6 +87,7 @@ function uploadImage() {
 function retrieveImage() {
     'use strict';
     var docData;
+    var iterations = 0;
 
     document.getElementById("show").addEventListener("click", function () {
         //Get a reference to the current Authenticated user and retrieve the ImgLinks array from that ref
@@ -141,12 +142,10 @@ function retrieveImage() {
             .doc(firebase.auth().currentUser.uid)
             .get()
             .then((docRef) => {
-                docData = docRef.data();
+            docData = docRef.data();
 
-                var imageArray = docData.imgLinks;
-
-                // Failsafe to insure that when next is pressed it doesn't delete 
-                // all the elements at the end of the array length.
+            var imageArray = docData.imgLinks;
+            
             removeElements();
 
             if (imageArray.length > 4)
@@ -158,20 +157,21 @@ function retrieveImage() {
                     imageThumb.src = docData.imgLinks[i];
                     imageThumb.className = "thumbnail-item";
 
+                    iterations++;
                     reset++; // Stores number of elements created - 4. Used in remove elements.
 
                     //Add the img to the DIV element of ID: "list"
                     document.getElementById('list').appendChild(imageThumb);
                     console.log("Image added!");
                 }
-                count = count + 4;
-            }
+                count = count + iterations;
+                iterations = 0;
+            } else { alert('Not enough images to increment.'); }
             });
          }, 
     );
 
     // Broken af prev button functionality
-    /*
     document.getElementById("prev").addEventListener("click", function () {
         //Get a reference to the current Authenticated user and retrieve the ImgLinks array from that ref
         firebase
@@ -185,22 +185,24 @@ function retrieveImage() {
                 var imageArray = docData.imgLinks;
                 removeElements();
             
-                for (var i = count; i > reset; i--) {
+                for (var i = count; i > (count - 4); i--) {
                     var imageThumb = document.createElement('img');
                     imageThumb.id = i;
                     //------------------ADD IMG PROPERTIES HERE--------------------------
-                    imageThumb.src = docData.imgLinks[i];
+                    imageThumb.src = docData.imgLinks[i - 1];
                     imageThumb.className = "thumbnail-item";
 
-                    count--;
-                    reset++; // Stores number of elements created - 4. Used in remove elements.
+                    iterations++;
+                    reset++;
 
                     //Add the img to the DIV element of ID: "list"
                     document.getElementById('list').appendChild(imageThumb);
                     console.log("Image added!");
-                }
+                } 
+                count = count - iterations;
+                iterations = 0;
             });
-         }) */
+         }) 
 }
 
 function removeElements() {
