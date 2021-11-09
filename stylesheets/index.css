@@ -38,6 +38,24 @@ body.gradient {
   height: 100vh; 
 }
 
+.logout-container {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    box-shadow: 4px 4.5px;
+    background: #fef9f8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 90%;
+    position: absolute;
+    top: 10%;
+    -ms-transform: translateY(-75%);
+    transform: translateY(-75%);
+}
+
 .square-container {
     /* Creates the square */
     width: 700px;
