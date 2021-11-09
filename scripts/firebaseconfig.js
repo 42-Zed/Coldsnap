@@ -1,11 +1,10 @@
 var firebaseConfig = {
-  apiKey: "AIzaSyCzWFqqY0iqx1eXd9uXLD2ELsoE-OiLvuw",
-  authDomain: "feedback-2d8bd.firebaseapp.com",
-  databaseURL: "https://feedback-2d8bd-default-rtdb.firebaseio.com",
-  projectId: "feedback-2d8bd",
-  storageBucket: "feedback-2d8bd.appspot.com",
-  messagingSenderId: "85959730833",
-  appId: "1:85959730833:web:56618073e1f6898c55c130"
+  apiKey: "AIzaSyCIr7JLql97Sjcd0lrTSmk3a5Dyt8Ll2hI",
+  authDomain: "coldsnap-6e039.firebaseapp.com",
+  projectId: "coldsnap-6e039",
+  storageBucket: "coldsnap-6e039.appspot.com",
+  messagingSenderId: "1063882457754",
+  appId: "1:1063882457754:web:b96b2fb04e8bc543c01523"
 };
 
 firebase.initializeApp(firebaseConfig);

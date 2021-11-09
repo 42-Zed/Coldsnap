@@ -23,12 +23,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
+body.gradient {
+  
   /* Gradient background for transitioning colors */
-  background: linear-gradient(-45deg, #000000, #FFFC99, #EB6123, #FFFFFF);
+  background: linear-gradient(-45deg, #000000, #0099E6, #CCFFFF, #FFFFFF);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  height: 100vh;
+  height: 100vh; 
 }
 
 .square-container {
@@ -69,4 +72,16 @@ body {
 .button {
   text-align:center;
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} 
 

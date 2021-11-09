@@ -2,6 +2,7 @@
 /* Snow effect by https://codepen.io/redstapler/pen/MZXJZx */
 html, body {
     margin: 0;
+    position: fixed;
 }
 .wrapper {
     width: 100vw;
