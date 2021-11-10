@@ -3,7 +3,6 @@ var files = [];
 var reader = new FileReader();
 var count = 0;
 var reset = 0;
-//var tempImageArray = new Array(4);
 
 //Select an Image Locally
 function selectImage() {
@@ -121,7 +120,7 @@ function retrieveImage() {
 
                     //Add the img to the DIV element of ID: "list"
                     document.getElementById('list').appendChild(imageThumb);
-                    document.getElementById(i).addEventListener("click", function() {
+                    document.getElementById(i).addEventListener("click", function () {
                         window.open(this.src);
                     })
                     console.log("Image added!");
@@ -148,7 +147,7 @@ function retrieveImage() {
                 docData = docRef.data();
                 var imageArray = docData.imgLinks;
                 console.log(imageArray.length);
-                if(!((count + 4 - imageArray.length) > 4)) {
+                if (!((count + 4 - imageArray.length) > 4)) {
                     removeElements();
                     if (imageArray.length > 4) {
                         for (var i = count; i < imageArray.length && i < count + 4; i++) {
@@ -158,19 +157,18 @@ function retrieveImage() {
                             imageThumb.src = docData.imgLinks[i];
                             imageThumb.className = "thumbnail-item";
                             imageThumb.onclick = "image(this)";
-    
+
                             reset++; // Stores number of elements created - 4. Used in remove elements.
-    
+
                             //Add the img to the DIV element of ID: "list"
                             document.getElementById('list').appendChild(imageThumb);
-                            document.getElementById(i).addEventListener("click", function() {
+                            document.getElementById(i).addEventListener("click", function () {
                                 window.open(this.src);
                             })
                             console.log("Image added!");
                         }
                         count = count + 4;
-                    } 
-                    else {
+                    } else {
                         alert('Not enough images to increment.');
                     }
                 }
@@ -239,7 +237,7 @@ function retrieveImage() {
                         imageThumb.className = "thumbnail-item";
 
                         document.getElementById('list').appendChild(imageThumb);
-                        document.getElementById(countCounter - 1).addEventListener("click", function() {
+                        document.getElementById(countCounter - 1).addEventListener("click", function () {
                             window.open(this.src);
                         })
                         console.log("Image added!");
