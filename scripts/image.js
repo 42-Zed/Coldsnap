@@ -116,16 +116,7 @@ function retrieveImage() {
                     //------------------ADD IMG PROPERTIES HERE--------------------------
                     imageThumb.src = docData.imgLinks[i];
                     imageThumb.className = "thumbnail-item";
-                    // imageThumb.addEventListener("click", function(){
-                    //     // var link = document.createElement('a');
-                    //     // link.href = imageThumb.src;
-                    //     // link.download = imageThumb.id + ".jpg";
-                    //     // document.body.appendChild(link);
-                    //     // link.click();
-                    //     // document.body.removeChild(link);
-                    //     window.open();
-                    // });
-                    //imageThumb.onclick = "image(this)";
+
                     count++; // Shows how many elements were created. To be used in Next/Prev for loops.
 
                     //Add the img to the DIV element of ID: "list"
@@ -183,8 +174,8 @@ function retrieveImage() {
                         alert('Not enough images to increment.');
                     }
                 }
-                // removeElements();
 
+                //------------------------------EXPERIMENTAL-------------------------------------------
                 // if (imageArray.length > 4) {
                 //     for (var i = count; i < imageArray.length && i < count + 4; i++) {
                 //         var imageThumb = document.createElement('img');
@@ -215,18 +206,6 @@ function retrieveImage() {
             .doc(firebase.auth().currentUser.uid)
             .get()
             .then((docRef) => {
-                // docData = docRef.data();
-
-                // var imageArray = docData.imgLinks;
-                // removeElements();
-
-                // //Remove 4 from count since we're going back to the previous 4 elements
-                // count = count - 4;
-                // var tempImageArray = new Array(4);
-                // var arrayCounter = 3;
-                // //Don't judge the variable names :P It works!
-                // var countCounter = count;
-
                 if (count > 4) {
                     docData = docRef.data();
 
@@ -241,9 +220,6 @@ function retrieveImage() {
                     var countCounter = count;
 
                     for (var i = count; count > 0 && count - i != 4; i--) {
-                        //var imageThumb = document.createElement('img');
-
-                        //imageThumb.id = i-1;
                         //------------------ADD IMG PROPERTIES HERE--------------------------
 
                         //Check that we're fetching a photo actually within the array
@@ -252,15 +228,8 @@ function retrieveImage() {
                             continue;
                         }
 
-                        // imageThumb.src = docData.imgLinks[i-1];
-                        // imageThumb.className = "thumbnail-item";
-
                         tempImageArray[arrayCounter] = docData.imgLinks[i - 1];
                         arrayCounter--;
-
-                        //Add the img to the DIV element of ID: "list"
-                        // document.getElementById('list').appendChild(imageThumb);
-                        // console.log("Image added!");
                     }
 
                     for (var i = 0; i < tempImageArray.length; i++) {
@@ -277,40 +246,6 @@ function retrieveImage() {
                         countCounter--;
                     }
                 }
-                // for (var i = count; count > 0 && count - i != 4; i--) {
-                //     //var imageThumb = document.createElement('img');
-
-                //     //imageThumb.id = i-1;
-                //     //------------------ADD IMG PROPERTIES HERE--------------------------
-
-                //     //Check that we're fetching a photo actually within the array
-                //     //If not, then continue to next iteration
-                //     if((i-1) > imageArray.length-1) {
-                //          continue;
-                //     }
-
-                //     // imageThumb.src = docData.imgLinks[i-1];
-                //     // imageThumb.className = "thumbnail-item";
-
-                //     tempImageArray[arrayCounter] = docData.imgLinks[i-1];
-                //     arrayCounter--;
-
-                //     //Add the img to the DIV element of ID: "list"
-                //     // document.getElementById('list').appendChild(imageThumb);
-                //     // console.log("Image added!");
-                // }
-
-                // for(var i = 0; i < tempImageArray.length; i++) {
-                //     var imageThumb = document.createElement('img');
-                //     imageThumb.id = countCounter-1;
-                //     imageThumb.src = tempImageArray[i];
-                //     imageThumb.className = "thumbnail-item";
-
-                //     document.getElementById('list').appendChild(imageThumb);
-
-                //     console.log("Image added!");
-                //     countCounter--;
-                // }
             });
     })
 }
